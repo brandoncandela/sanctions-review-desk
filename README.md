@@ -45,3 +45,7 @@ Official guidance consulted September 9, 2026:
 The acronym CAR is intentionally not used: the interview-specific meaning has not yet been established.
 
 Built with AI assistance. The portfolio value is the investigation structure, explicit evidence gaps and reviewable reasoning; effectiveness has not been validated in a production compliance team.
+
+## Corrections and reviewer handoff
+
+Returned submissions now include an analyst response. A response is required before resubmission and stays with the earlier review. QC displays changed assessment fields and a before/after comparison of the current draft. Exported Markdown reports include the actual pinned synthetic evidence, selected information requests, submitted assessments, findings and responses. Existing version 1 files remain supported; older returned cases can have a response added after opening.
