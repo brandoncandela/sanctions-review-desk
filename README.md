@@ -49,3 +49,7 @@ Built with AI assistance. The portfolio value is the investigation structure, ex
 ## Corrections and reviewer handoff
 
 Returned submissions now include an analyst response. A response is required before resubmission and stays with the earlier review. QC displays changed assessment fields and a before/after comparison of the current draft. Exported Markdown reports include the actual pinned synthetic evidence, selected information requests, submitted assessments, findings and responses. Existing version 1 files remain supported; older returned cases can have a response added after opening.
+
+## Evidence request tracker
+
+Selected information requests have a status and response/rationale field. Track not sent, requested, received but unverified, reviewed sufficient, or reviewed insufficient. The tracker does not send requests or authenticate documents. Reviewed entries require a rationale before QC submission; incomplete drafts can still be saved and reopened. Tracker updates appear in reports and submission comparisons.
