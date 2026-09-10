@@ -53,3 +53,11 @@ Returned submissions now include an analyst response. A response is required bef
 ## Evidence request tracker
 
 Selected information requests have a status and response/rationale field. Track not sent, requested, received but unverified, reviewed sufficient, or reviewed insufficient. The tracker does not send requests or authenticate documents. Reviewed entries require a rationale before QC submission; incomplete drafts can still be saved and reopened. Tracker updates appear in reports and submission comparisons.
+
+## Custom cases and evidence-backed comparisons
+
+Create an individual or business case with party identifiers, a review trigger, optional shipment context, manually recorded screening source, entry reference and screening date. Record two source notes: party information and the screening record. This does not retrieve a list or confirm a designation. Use public or fictional information in this prototype.
+
+Each comparison now supports a reason and an evidence reference. New custom cases require these before QC submission. Reports retain both pinned evidence and source notes cited by comparisons. Intake facts are fixed after creation to keep the context of submitted reviews stable; create a new case to correct intake facts.
+
+Version 2 portable files carry custom definitions alongside assessments and QC history. Older version 1 training-case files remain supported. Unknown case IDs, duplicate custom IDs, invalid dates, missing screening provenance and dangling evidence references are rejected. Maximum 20 custom cases and 2 MB per workspace export. Case files remain local downloads; no hosted case database or verified user roles are provided.
