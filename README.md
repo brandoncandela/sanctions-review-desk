@@ -62,3 +62,6 @@ Version 2 portable files carry custom definitions alongside assessments and QC h
 
 ## Live OFAC screening
 Search current SDN primary names and aliases from official OFAC CSV downloads. The server caches data for five minutes. Queries use normalized whole-word matching, not fuzzy matching. Results are candidate leads, never clearance. Select a result to prefill a case with source URLs, query, retrieval/search timestamps and the candidate excerpt. Add party evidence before creating the case. Saved files are editable and are not authenticated records. Non-SDN lists, ownership, export controls and other jurisdictions are outside search scope. Source failures return an unavailable message rather than zero hits.
+
+### Download-service fallback
+The app attempts a direct official download, then reads the repository feed when the host cannot reach OFAC. GitHub Actions refreshes the official SDN and alias files hourly and on refresh-script changes. Scheduled runs may be delayed or disabled by GitHub; records older than 24 hours are rejected. Retrieval time and delivery route appear in results and selected case evidence. This is a periodically refreshed feed, not instantaneous monitoring. The CSV excerpt omits address and extended-comment companion files; review the complete official entry before resolving a candidate.
