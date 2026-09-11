@@ -42,8 +42,6 @@ Official guidance consulted September 9, 2026:
 - [OFAC FAQ 401: ownership and the 50 Percent Rule](https://ofac.treasury.gov/faqs/401)
 - [BIS freight forwarder guidance](https://www.bis.gov/learn-support/export-compliance-programs/freight-forwarder-guidance)
 
-The acronym CAR is intentionally not used: the interview-specific meaning has not yet been established.
-
 Built with AI assistance. The portfolio value is the investigation structure, explicit evidence gaps and reviewable reasoning; effectiveness has not been validated in a production compliance team.
 
 ## Corrections and reviewer handoff
