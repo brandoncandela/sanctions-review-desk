@@ -9,11 +9,13 @@ export function search(list:Entry[],query:string){const words=normalize(query).s
 export const feedUrl='https://raw.githubusercontent.com/brandoncandela/sanctions-review-desk/main/data/ofac-sdn.json';
 let cache:{at:number;data:Entry[];delivery:string}|undefined;
 let pending:Promise<NonNullable<typeof cache>>|undefined;
-export async function currentList(){
+// Browsers cannot read the OFAC downloads directly (no CORS on the redirect), so browser callers pass {direct:false}.
+export async function currentList({direct=true}:{direct?:boolean}={}){
  if(cache&&Date.now()-cache.at<300000)return cache;
  if(pending)return pending;
  pending=(async()=>{
   try{
+   if(!direct)throw Error('Direct download skipped');
    const texts=await Promise.all(['SDN.CSV','ALT.CSV'].map(async file=>{
     const r=await fetch(sourceBase+file,{signal:AbortSignal.timeout(8000)});
     if(!r.ok)throw Error('OFAC unavailable');
