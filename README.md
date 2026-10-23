@@ -2,7 +2,7 @@
 
 ![Sanctions Review Desk](docs/social-preview.jpg)
 
-**[▶ Open the live demo](https://brandon-sanctions-review-desk.brandon-d-candela.chatgpt.site/)** · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS
+**[▶ Open the live demo](https://brandoncandela.github.io/sanctions-review-desk/)** · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS
 
 > **What this shows:** Sanctions alert investigation from possible match to documented assessment: identifier comparison, export-control context, information requests and QC.
 
@@ -71,3 +71,7 @@ Search current SDN primary names and aliases from official OFAC CSV downloads. T
 
 ### Download-service fallback
 The app attempts a direct official download, then reads the repository feed when the host cannot reach OFAC. GitHub Actions refreshes the official SDN and alias files hourly and on refresh-script changes. Scheduled runs may be delayed or disabled by GitHub; records older than 24 hours are rejected. Retrieval time and delivery route appear in results and selected case evidence. This is a periodically refreshed feed, not instantaneous monitoring. The CSV excerpt omits address and extended-comment companion files; review the complete official entry before resolving a candidate.
+
+## Static build (GitHub Pages)
+
+The live demo is a static build of the same app, with no server. `pnpm build:pages` writes `pages-dist/`, which is published to the `gh-pages` branch. OFAC name search runs in the browser ([lib/screen.ts](lib/screen.ts)) against the repository's hourly OFAC snapshot, refreshed by [the scheduled workflow](.github/workflows/refresh-ofac.yml). The Cloudflare build (`pnpm build`) is unchanged.
