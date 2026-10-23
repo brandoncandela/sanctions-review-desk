@@ -1,5 +1,11 @@
 # Sanctions Review Desk
 
+![Sanctions Review Desk](docs/social-preview.jpg)
+
+**[▶ Open the live demo](https://brandon-sanctions-review-desk.brandon-d-candela.chatgpt.site/)** · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS
+
+> **What this shows:** Sanctions alert investigation from possible match to documented assessment: identifier comparison, export-control context, information requests and QC.
+
 An independent AML portfolio work sample for sanctions alert investigation and QC. All parties, identifiers, candidate matches and documents are fictional. This is not live screening, legal advice, a sanctions determination or shipment authorization. No affiliation with Apple or any regulator.
 
 ## What you can do
