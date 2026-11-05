@@ -2,76 +2,70 @@
 
 ![Sanctions Review Desk](docs/social-preview.jpg)
 
-**[▶ Open the live demo](https://brandoncandela.github.io/sanctions-review-desk/)** · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS
+**[▶ Open the live demo](https://brandoncandela.github.io/sanctions-review-desk/)** · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS, PMP
 
-> **What this shows:** Sanctions alert investigation from possible match to documented assessment: identifier comparison, export-control context, information requests and QC.
+> **What this shows:** how a sanctions alert goes from "possible name match" to a documented decision a QC reviewer can check.
 
-An independent AML portfolio work sample for sanctions alert investigation and QC. All parties, identifiers, candidate matches and documents are fictional. This is not live screening, legal advice, a sanctions determination or shipment authorization. No affiliation with Apple or any regulator.
+## What it does
 
-## What you can do
+A screening system says a customer or shipment party might match someone on the OFAC sanctions list. An analyst then has to compare identifiers, ask for missing information, decide and explain the decision. This desk walks through those steps, with a QC review at the end.
 
-- Work through three fictional cases: a California → Hong Kong → Shenzhen shipment amendment, an individual identity comparison, and a Vietnam → China shipment with a third-party payer.
-- Compare identity attributes and record whether each supports, challenges or leaves the possible match unresolved.
-- Inspect synthetic source records, pin evidence and select information requests.
-- Distinguish sanctions questions from export-control and diversion questions.
-- Write an assessment, alternatives and disposition rationale.
-- Submit a preserved assessment snapshot for QC, return it for correction, or record a documentation-review outcome. Later edits do not inherit the review.
-- Download and reopen all case reviews as JSON, or export a case report.
+It includes three made-up training cases:
 
-The app helps demonstrate a review process. It does not search sanctions lists, calculate ownership restrictions, classify products, screen countries, enforce independent reviewers or authorize transactions. Names and timestamps in imported files are not authenticated. Notes stay in the tab until explicitly downloaded. The prototype is intended for fictional training data, not confidential investigations.
+- a shipment rerouted from California through Hong Kong to Shenzhen
+- an individual whose name resembles a listed person
+- a Vietnam-to-China shipment paid for by a third party
 
-## Run locally
+You can also search the real OFAC list and open a new case from any result.
 
-Node 22.13+ and pnpm are required.
+## Try it
+
+1. Open the [live demo](https://brandoncandela.github.io/sanctions-review-desk/) and pick a training case.
+2. Compare each identifier and mark whether it supports the match, argues against it or is still unknown.
+3. Pin the source records that back your view and track the information requests you'd send.
+4. Write your assessment and submit it for QC.
+5. Switch roles: review the submission, return it with findings, then respond and resubmit.
+
+To search the list, click **Search OFAC list** and type a name.
+
+## How the OFAC search works
+
+A scheduled GitHub Action downloads the official SDN and alias files every hour and saves them in [`data/ofac-sdn.json`](data/ofac-sdn.json). The search runs in your browser against that copy. All words in your query must appear in a name or alias, ignoring accents, punctuation and word order. It doesn't do fuzzy spelling.
+
+If the copy is more than 24 hours old, the search refuses to run rather than give stale results. Each result shows when the data was retrieved. A match is a starting point for review; no match doesn't mean someone is cleared.
+
+## Design choices
+
+- **Unknown is its own answer.** Missing information is tracked as unknown, never counted as a mismatch.
+- **Sanctions and export controls stay separate.** A shipment can raise both questions, and the case keeps them apart.
+- **Frozen QC snapshots.** Each submission is saved as it was. If the analyst edits afterwards, the old review no longer counts for the new version, and the reviewer sees a before-and-after comparison.
+- **Portable case files.** All reviews, custom cases and QC history save to one JSON file that can be reopened later. Files are checked on import, and broken references are rejected.
+
+## Run it locally
+
+Node 22.13 or later and pnpm.
 
 ```sh
 pnpm install
-pnpm dev
+pnpm dev        # local server
+pnpm test       # 21 tests: cases, case files and OFAC search
+pnpm build      # static site in pages-dist/
 ```
 
-Open the local URL printed by the development server. Production build: `pnpm build`.
+| Path | What's in it |
+| --- | --- |
+| `app/` | The React interface |
+| `lib/cases.ts` | Training cases, comparisons, QC rounds and case-file checks |
+| `lib/screening.ts`, `lib/screen.ts` | OFAC list parsing and search |
+| `scripts/refresh-ofac.mjs` | The hourly OFAC download, run by GitHub Actions |
+| `tests/` | Node tests |
 
-Validation:
+## Limits
 
-```sh
-pnpm exec tsc --noEmit
-node --experimental-strip-types --test tests/cases.test.ts
-```
+- The training cases are made up and don't describe real violations. Routing alone doesn't prove anything is prohibited.
+- The search covers SDN names and aliases only. It doesn't check ownership (the 50 Percent Rule), other lists, or export classifications.
+- Reviewer names are typed in, not real accounts, and case files can be edited by anyone who has them.
 
-## Methodology and references
+Guidance used: [OFAC FAQ 5 on name matches](https://ofac.treasury.gov/faqs/5), [OFAC FAQ 401 on ownership](https://ofac.treasury.gov/faqs/401) and [BIS freight forwarder guidance](https://www.bis.gov/learn-support/export-compliance-programs/freight-forwarder-guidance).
 
-The fictional cases are editorial training scenarios, not examples of actual sanctions violations. Geographic routing does not establish a prohibition. Product classification, jurisdiction, parties, end use and applicable authorizations require fact-specific review.
-
-Official guidance consulted September 9, 2026:
-
-- [OFAC FAQ 5: assessing name matches](https://ofac.treasury.gov/faqs/5)
-- [OFAC FAQ 401: ownership and the 50 Percent Rule](https://ofac.treasury.gov/faqs/401)
-- [BIS freight forwarder guidance](https://www.bis.gov/learn-support/export-compliance-programs/freight-forwarder-guidance)
-
-Built with AI assistance. The portfolio value is the investigation structure, explicit evidence gaps and reviewable reasoning; effectiveness has not been validated in a production compliance team.
-
-## Corrections and reviewer handoff
-
-Returned submissions now include an analyst response. A response is required before resubmission and stays with the earlier review. QC displays changed assessment fields and a before/after comparison of the current draft. Exported Markdown reports include the actual pinned synthetic evidence, selected information requests, submitted assessments, findings and responses. Existing version 1 files remain supported; older returned cases can have a response added after opening.
-
-## Evidence request tracker
-
-Selected information requests have a status and response/rationale field. Track not sent, requested, received but unverified, reviewed sufficient, or reviewed insufficient. The tracker does not send requests or authenticate documents. Reviewed entries require a rationale before QC submission; incomplete drafts can still be saved and reopened. Tracker updates appear in reports and submission comparisons.
-
-## Custom cases and evidence-backed comparisons
-
-Create an individual or business case with party identifiers, a review trigger, optional shipment context, manually recorded screening source, entry reference and screening date. Record two source notes: party information and the screening record. This does not retrieve a list or confirm a designation. Use public or fictional information in this prototype.
-
-Each comparison now supports a reason and an evidence reference. New custom cases require these before QC submission. Reports retain both pinned evidence and source notes cited by comparisons. Intake facts are fixed after creation to keep the context of submitted reviews stable; create a new case to correct intake facts.
-
-Version 2 portable files carry custom definitions alongside assessments and QC history. Older version 1 training-case files remain supported. Unknown case IDs, duplicate custom IDs, invalid dates, missing screening provenance and dangling evidence references are rejected. Maximum 20 custom cases and 2 MB per workspace export. Case files remain local downloads; no hosted case database or verified user roles are provided.
-
-## Live OFAC screening
-Search current SDN primary names and aliases from official OFAC CSV downloads. The server caches data for five minutes. Queries use normalized whole-word matching, not fuzzy matching. Results are candidate leads, never clearance. Select a result to prefill a case with source URLs, query, retrieval/search timestamps and the candidate excerpt. Add party evidence before creating the case. Saved files are editable and are not authenticated records. Non-SDN lists, ownership, export controls and other jurisdictions are outside search scope. Source failures return an unavailable message rather than zero hits.
-
-### Download-service fallback
-The app attempts a direct official download, then reads the repository feed when the host cannot reach OFAC. GitHub Actions refreshes the official SDN and alias files hourly and on refresh-script changes. Scheduled runs may be delayed or disabled by GitHub; records older than 24 hours are rejected. Retrieval time and delivery route appear in results and selected case evidence. This is a periodically refreshed feed, not instantaneous monitoring. The CSV excerpt omits address and extended-comment companion files; review the complete official entry before resolving a candidate.
-
-## Static build (GitHub Pages)
-
-The live demo is a static build of the same app, with no server. `pnpm build:pages` writes `pages-dist/`, which is published to the `gh-pages` branch. OFAC name search runs in the browser ([lib/screen.ts](lib/screen.ts)) against the repository's hourly OFAC snapshot, refreshed by [the scheduled workflow](.github/workflows/refresh-ofac.yml). The Cloudflare build (`pnpm build`) is unchanged.
+Built with AI coding tools.
