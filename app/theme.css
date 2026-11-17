@@ -1,0 +1,90 @@
+/* White and blue portfolio look for this desk, with an azure accent. Imported after globals.css and apple.css. */
+:root {
+  font-family: "Inter", system-ui, -apple-system, sans-serif; color: #1d1d1f; background: #fbfcff;
+  --navy: #1d1d1f; --ink: #1d1d1f; --muted: #55555d; --line: rgb(29 29 31 / .09);
+  --blue: #0071e3; --blue-dark: #0058b0;
+  --glass: rgb(255 255 255 / .74);
+  --glass-shadow: 0 1px 0 rgb(255 255 255 / .8) inset, 0 12px 32px rgb(30 58 138 / .07);
+}
+html, body { background: #fbfcff; }
+::selection { background: rgb(0 113 227 / .18); color: inherit; }
+* { scrollbar-color: auto; }
+
+button { border: 0; border-radius: 999px; background: rgb(29 29 31 / .06); color: #1d1d1f; font-weight: 600; }
+button:hover { background: rgb(29 29 31 / .1); border-color: transparent; box-shadow: none; }
+.primary { background: #1d1d1f; color: #fff; }
+.primary:hover { background: #000; }
+
+/* Sidebar becomes a frosted rail */
+.sidebar { background: rgb(255 255 255 / .62); color: #1d1d1f; border-right: 1px solid var(--line); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%); }
+.brand svg { color: var(--blue); }
+.brand span { color: #86868b; }
+.sidebar > .eyebrow { color: #86868b; }
+.sidebar > button:not(.case-nav) { background: rgb(29 29 31 / .06); color: #1d1d1f; border: 0; }
+.sidebar > button:not(.case-nav):first-of-type { background: #1d1d1f; color: #fff; }
+.sidebar > button:not(.case-nav):hover { background: rgb(29 29 31 / .1); }
+.sidebar > button:not(.case-nav):first-of-type:hover { background: #000; }
+.case-nav { border-radius: 14px; color: #55555d; }
+.case-nav:hover { background: rgb(0 113 227 / .06); border-color: transparent; }
+.case-nav.active { background: rgb(0 113 227 / .1); border-color: transparent; color: #1d1d1f; box-shadow: inset 3px 0 var(--blue); }
+.sidebar-bottom, .sidebar-bottom p { color: #86868b; }
+.sidebar-bottom a { color: var(--blue); }
+.dot { background: var(--blue); }
+
+.workspace header { background: rgb(251 252 255 / .72); border-bottom: 1px solid var(--line); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%); position: sticky; top: 0; z-index: 10; }
+
+/* Purpose banner: light card with the illustration */
+.purpose { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(240px, .9fr); column-gap: 32px; align-items: start; color: #1d1d1f; }
+.purpose > * { grid-column: 1; min-width: 0; }
+.purpose > .ap-art { grid-column: 2; grid-row: 1 / span 8; align-self: center; }
+.purpose h2 { color: #1d1d1f; font-weight: 800; letter-spacing: -.03em; }
+.purpose p, .purpose ul { color: #55555d; }
+.purpose .muted { color: #86868b; }
+.purpose summary { color: var(--blue); }
+.purpose details { border-top-color: var(--line); }
+.purpose-actions button { background: #1d1d1f; color: #fff; }
+.purpose-actions button:hover { background: #000; }
+.purpose-actions button + button { background: rgb(29 29 31 / .06); color: #1d1d1f; }
+.purpose-actions button + button:hover { background: rgb(29 29 31 / .1); }
+
+.purpose, section, .summary {
+  background: var(--glass); border: 1px solid rgb(255 255 255 / .7); border-radius: 18px;
+  box-shadow: var(--glass-shadow); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+.summary { overflow: hidden; }
+.summary > div { border-right-color: var(--line); }
+.case-title h1 { font-weight: 800; letter-spacing: -.03em; }
+.status { border: 0; border-radius: 999px; }
+.training span { border: 0; border-radius: 999px; background: rgb(0 113 227 / .1); color: #0058b0; }
+.trigger { border: 0; border-radius: 14px; }
+
+.steps { border: 0; background: rgb(29 29 31 / .05); border-radius: 999px; padding: 4px; gap: 4px; margin-bottom: 14px; }
+.steps button { border: 0; border-radius: 999px; }
+.steps button:hover { background: rgb(255 255 255 / .6); }
+.steps button.selected { background: #fff; color: #1d1d1f; box-shadow: 0 1px 3px rgb(0 0 0 / .1); }
+.steps button span { border-radius: 50%; }
+.steps button.selected span { background: var(--blue); }
+
+.route { background: rgb(0 113 227 / .06); color: #1d1d1f; border: 0; border-radius: 16px; }
+.route span { border-color: rgb(0 113 227 / .3); color: var(--blue); border-radius: 50%; }
+.route svg { color: #86868b; }
+.tag { border: 0; border-radius: 999px; background: rgb(0 113 227 / .08); color: #0058b0; }
+.message, .note { border: 0; border-radius: 12px; background: rgb(0 113 227 / .06); }
+.note svg { color: var(--blue); }
+thead th { background: transparent; color: #86868b; font-weight: 500; }
+.evidence-item { border-radius: 12px; justify-content: flex-start; }
+.evidence-item.chosen { background: rgb(0 113 227 / .1); }
+.document, .request, .pin-summary, .review { border-radius: 14px; }
+input, select, textarea { border: 1px solid rgb(29 29 31 / .14); border-radius: 10px; }
+input:focus, select:focus, textarea:focus { outline: 3px solid rgb(0 113 227 / .25); border-color: var(--blue); }
+summary { color: var(--blue); }
+footer a { color: var(--blue); }
+pre { background: #f5f8ff; color: #1e3a8a; border-radius: 12px; }
+
+@media (max-width: 1000px) {
+  .purpose { grid-template-columns: minmax(0, 1fr); }
+  .purpose > .ap-art { grid-column: 1; grid-row: auto; max-width: 420px; margin-top: 12px; }
+}
+@media (max-width: 760px) {
+  .steps { border-radius: 16px; }
+}
