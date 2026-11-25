@@ -2,7 +2,7 @@
 
 ![Sanctions Review Desk](docs/social-preview.jpg)
 
-**[▶ Open the live demo](https://brandoncandela.github.io/sanctions-review-desk/)** · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS, PMP
+**[▶ Open the live demo](https://brandoncandela.github.io/sanctions-review-desk/)** · [Technical case study](https://brandoncandela.github.io/case-studies/sanctions-review-desk.html) · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS, PMP
 
 > **What this shows:** how a sanctions alert goes from "possible name match" to a documented decision a QC reviewer can check.
 
