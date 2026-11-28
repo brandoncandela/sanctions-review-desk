@@ -1,5 +1,7 @@
 # Sanctions Review Desk
 
+[![CI](https://github.com/brandoncandela/sanctions-review-desk/actions/workflows/ci.yml/badge.svg)](https://github.com/brandoncandela/sanctions-review-desk/actions/workflows/ci.yml)
+
 ![Sanctions Review Desk](docs/social-preview.jpg)
 
 **[▶ Open the live demo](https://brandoncandela.github.io/sanctions-review-desk/)** · [Technical case study](https://brandoncandela.github.io/case-studies/sanctions-review-desk.html) · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS, PMP
@@ -30,7 +32,7 @@ To search the list, click **Search OFAC list** and type a name.
 
 ## How the OFAC search works
 
-A scheduled GitHub Action downloads the official SDN and alias files every hour and saves them in [`data/ofac-sdn.json`](data/ofac-sdn.json). The search runs in your browser against that copy. All words in your query must appear in a name or alias, ignoring accents, punctuation and word order. It doesn't do fuzzy spelling.
+A scheduled GitHub Action downloads the official SDN and alias files every hour and saves them as [`ofac-sdn.json`](https://github.com/brandoncandela/sanctions-review-desk/blob/data/ofac-sdn.json) on the separate `data` branch, so the hourly commits stay off `main`. The search runs in your browser against that copy. The `data/ofac-sdn.json` file on `main` is an older snapshot kept for local work; the app doesn't read it. All words in your query must appear in a name or alias, ignoring accents, punctuation and word order. It doesn't do fuzzy spelling.
 
 If the copy is more than 24 hours old, the search refuses to run rather than give stale results. Each result shows when the data was retrieved. A match is a starting point for review; no match doesn't mean someone is cleared.
 
@@ -57,7 +59,7 @@ pnpm build      # static site in pages-dist/
 | `app/` | The React interface |
 | `lib/cases.ts` | Training cases, comparisons, QC rounds and case-file checks |
 | `lib/screening.ts`, `lib/screen.ts` | OFAC list parsing and search |
-| `scripts/refresh-ofac.mjs` | The hourly OFAC download, run by GitHub Actions |
+| `scripts/refresh-ofac.mjs` | The hourly OFAC download, run by GitHub Actions and saved to the `data` branch |
 | `tests/` | Node tests |
 
 ## Limits
