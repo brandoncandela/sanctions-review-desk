@@ -1,5 +1,7 @@
 # Sanctions Review Desk
 
+[![CI](https://github.com/brandoncandela/sanctions-review-desk/actions/workflows/ci.yml/badge.svg)](https://github.com/brandoncandela/sanctions-review-desk/actions/workflows/ci.yml)
+
 ![Sanctions Review Desk](docs/social-preview.jpg)
 
 **[▶ Open the live demo](https://brandoncandela.github.io/sanctions-review-desk/)** · [Technical case study](https://brandoncandela.github.io/case-studies/sanctions-review-desk.html) · [Portfolio](https://brandoncandela.github.io/) · [LinkedIn](https://www.linkedin.com/in/brandon-candela/) · Built by Brandon Candela, CAMS, PMP
