@@ -6,7 +6,8 @@ const clean=(s:string)=>s==='-0-'?'Not supplied':s;
 export function entries(sdn:string,alt:string){const map=new Map<string,Entry>();for(const r of csv(sdn)){if(r.length!==12||!/^\d+$/.test(r[0])||!r[1])throw Error('Unexpected SDN format');map.set(r[0],{id:r[0],name:r[1],kind:clean(r[2]),program:clean(r[3]),remarks:clean(r[11]),aliases:[]})}for(const r of csv(alt)){if(r.length!==5||!/^\d+$/.test(r[0]))throw Error('Unexpected alias format');map.get(r[0])?.aliases.push(r[3])}if(!map.size)throw Error('Empty source list');return [...map.values()]}
 export function normalize(s:string){return s.normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
 export function search(list:Entry[],query:string){const words=normalize(query).split(' ').filter(Boolean);if(!words.length)throw Error('Enter a name');return list.flatMap(e=>{const matched=[e.name,...e.aliases].find(n=>words.every(w=>normalize(n).split(' ').includes(w)));return matched?[{...e,matched}]:[]})}
-export const feedUrl='https://raw.githubusercontent.com/brandoncandela/sanctions-review-desk/main/data/ofac-sdn.json';
+// The hourly copy lives on the orphan data branch so refresh commits stay off main.
+export const feedUrl='https://raw.githubusercontent.com/brandoncandela/sanctions-review-desk/data/ofac-sdn.json';
 let cache:{at:number;data:Entry[];delivery:string}|undefined;
 let pending:Promise<NonNullable<typeof cache>>|undefined;
 // Browsers cannot read the OFAC downloads directly (no CORS on the redirect), so browser callers pass {direct:false}.

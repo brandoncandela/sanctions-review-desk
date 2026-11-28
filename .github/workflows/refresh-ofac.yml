@@ -1,6 +1,7 @@
 name: Refresh official OFAC data
 on:
   push:
+    branches: [main]
     paths:
       - scripts/refresh-ofac.mjs
       - .github/workflows/refresh-ofac.yml
@@ -22,11 +23,19 @@ jobs:
         with:
           node-version: '24'
       - run: node --experimental-strip-types scripts/refresh-ofac.mjs
-      - name: Save refreshed official data
+      # The refreshed file goes to the orphan data branch, not main, so the hourly
+      # commits don't bury real ones. The app reads it from raw.githubusercontent.com.
+      - uses: actions/checkout@v4
+        with:
+          ref: data
+          path: data-branch
+      - name: Save refreshed official data to the data branch
+        working-directory: data-branch
         run: |
+          cp ../data/ofac-sdn.json ofac-sdn.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/ofac-sdn.json
+          git add ofac-sdn.json
           git diff --cached --quiet && exit 0
           git commit -m 'Refresh official OFAC SDN snapshot'
-          git push
+          git push origin HEAD:data
